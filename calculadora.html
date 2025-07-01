@@ -5,7 +5,6 @@
   <title>Calculadora do Amor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* ———————— Estilos visuais ———————— */
     * {
       margin: 0;
       padding: 0;
@@ -24,6 +23,17 @@
       font-size: 32px;
       margin-bottom: 20px;
       color: #ff4081;
+    }
+
+    #playButton {
+      padding: 16px 32px;
+      font-size: 18px;
+      border-radius: 8px;
+      background: #ff4081;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
     }
 
     .gallery {
@@ -98,9 +108,9 @@
 <body>
   <header>Calculadora do Amor</header>
 
-  <audio id="bg-audio" autoplay loop
-           onplay="sessionStorage.setItem('audioPermitido', 'sim');"
-          style="display: none;">
+  <button id="playButton">▶️ Iniciar</button>
+
+  <audio id="bg-audio" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
 
@@ -137,18 +147,6 @@
   </div>
 
   <script>
-    // Inicia o áudio apenas se permitido na tela anterior
-    window.onload = () => {
-      const audio = document.getElementById("bg-audio");
-      const liberado = sessionStorage.getItem("audioPermitido");
-
-      if (liberado === "sim" && audio) {
-        audio.play().catch(err => {
-          console.log("Navegador bloqueou o áudio:", err);
-        });
-      }
-    };
-
     const phrases = [
       "Vivemos dias inesquecíveis.",
       "Cada instante foi mágico.",
@@ -168,22 +166,35 @@
       "Que venham muitos mais."
     ];
 
+    const playButton = document.getElementById('playButton');
+    const audio = document.getElementById("bg-audio");
     const images = document.querySelectorAll('.gallery img');
     const phraseEl = document.getElementById('lovePhrase');
     let current = 0;
+    let galleryInterval = null;
 
-    setInterval(() => {
-      if (images.length === 0) return;
-      images[current].classList.remove('active');
-      current = (current + 1) % images.length;
-      images[current].classList.add('active');
+    function startGallery() {
+      galleryInterval = setInterval(() => {
+        if (images.length === 0) return;
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
 
-      phraseEl.style.opacity = 0;
-      setTimeout(() => {
-        phraseEl.textContent = phrases[current % phrases.length];
-        phraseEl.style.opacity = 1;
-      }, 300);
-    }, 2000);
+        phraseEl.style.opacity = 0;
+        setTimeout(() => {
+          phraseEl.textContent = phrases[current % phrases.length];
+          phraseEl.style.opacity = 1;
+        }, 300);
+      }, 2000);
+    }
+
+    playButton.addEventListener('click', () => {
+      playButton.style.display = 'none';
+      audio.play().catch(err => {
+        console.log("Erro ao iniciar áudio:", err);
+      });
+      startGallery();
+    });
 
     function updateTimer() {
       const start = new Date('2023-11-21T23:00:00');
