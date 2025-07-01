@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora do Amor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora do Amor</title>
   <style>
     * {
       margin: 0;
@@ -23,17 +23,6 @@
       font-size: 32px;
       margin-bottom: 20px;
       color: #ff4081;
-    }
-
-    #playButton {
-      padding: 16px 32px;
-      font-size: 18px;
-      border-radius: 8px;
-      background: #ff4081;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 20px;
     }
 
     .gallery {
@@ -97,6 +86,22 @@
       color: #ccc;
     }
 
+    #play-audio-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #play-audio-btn:hover {
+      background-color: #e03575;
+    }
+
     @media (max-width: 600px) {
       .timer-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -108,42 +113,60 @@
 <body>
   <header>Calculadora do Amor</header>
 
-  <button id="playButton">▶️ Iniciar</button>
-
   <audio id="bg-audio" loop>
     <source src="musica.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio HTML5.
+    Seu navegador não suporta o elemento de áudio.
   </audio>
 
-  <div class="gallery">
-    <img src="img/São João.jpeg" class="active" alt="foto 1">
-    <img src="img/Nova Santa Rita.jpeg" alt="foto 2">
-    <img src="img/Picada Café.jpeg" alt="foto 3">
-    <img src="img/Capão.jpeg" alt="foto 4">
-    <img src="img/Comidinhas.jpeg" alt="foto 5">
-    <img src="img/Banheira.jpeg" alt="foto 6">
-    <img src="img/Bebidinhas 2.jpeg" alt="foto 7">
-    <img src="img/Bebidinhas.jpeg" alt="foto 8">
-    <img src="img/Reveion.jpeg" alt="foto 9">
-    <img src="img/Thiago Ventura.jpeg" alt="foto 10">
-    <img src="img/Boqueirao.jpeg" alt="foto 11">
-    <img src="img/Dia dos Namorados.jpeg" alt="foto 12">
-    <img src="img/Nova Petrópolis.jpeg" alt="foto 13">
-    <img src="img/Porto Alegre.jpeg" alt="foto 14">
-    <img src="img/Formatura.jpeg" alt="foto 15">
-    <img src="img/Garopaba.jpeg" alt="foto 16">
-  </div>
+    <div class="gallery">
+      <img src="imagens/foto1.jpg" alt="Foto 1" class="active" />
+      <img src="imagens/foto2.jpg" alt="Foto 2" />
+      <img src="imagens/foto3.jpg" alt="Foto 3" />
+      <img src="imagens/foto4.jpg" alt="Foto 4" />
+      <img src="imagens/foto5.jpg" alt="Foto 5" />
+      <img src="imagens/foto6.jpg" alt="Foto 6" />
+      <img src="imagens/foto7.jpg" alt="Foto 7" />
+      <img src="imagens/foto8.jpg" alt="Foto 8" />
+      <img src="imagens/foto9.jpg" alt="Foto 9" />
+      <img src="imagens/foto10.jpg" alt="Foto 10" />
+      <img src="imagens/foto11.jpg" alt="Foto 11" />
+      <img src="imagens/foto12.jpg" alt="Foto 12" />
+      <img src="imagens/foto13.jpg" alt="Foto 13" />
+      <img src="imagens/foto14.jpg" alt="Foto 14" />
+      <img src="imagens/foto15.jpg" alt="Foto 15" />
+      <img src="imagens/foto16.jpg" alt="Foto 16" />
+    </div>
+
+  <button id="play-audio-btn">▶ Tocar Música</button>
 
   <div class="love-phrase" id="lovePhrase">Vivemos dias inesquecíveis.</div>
 
   <div class="timer-section">
     <div class="timer-grid">
-      <div class="timer-block"><div class="timer-number" id="years">0</div><div class="timer-label">Anos</div></div>
-      <div class="timer-block"><div class="timer-number" id="months">0</div><div class="timer-label">Meses</div></div>
-      <div class="timer-block"><div class="timer-number" id="days">0</div><div class="timer-label">Dias</div></div>
-      <div class="timer-block"><div class="timer-number" id="hours">0</div><div class="timer-label">Horas</div></div>
-      <div class="timer-block"><div class="timer-number" id="minutes">0</div><div class="timer-label">Minutos</div></div>
-      <div class="timer-block"><div class="timer-number" id="seconds">0</div><div class="timer-label">Segundos</div></div>
+      <div class="timer-block">
+        <div class="timer-number" id="years">0</div>
+        <div class="timer-label">Anos</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="months">0</div>
+        <div class="timer-label">Meses</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="days">0</div>
+        <div class="timer-label">Dias</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="hours">0</div>
+        <div class="timer-label">Horas</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="minutes">0</div>
+        <div class="timer-label">Minutos</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="seconds">0</div>
+        <div class="timer-label">Segundos</div>
+      </div>
     </div>
   </div>
 
@@ -167,63 +190,67 @@
       "Que venham muitos mais."
     ];
 
-    const playButton = document.getElementById('playButton');
-    const audio = document.getElementById("bg-audio");
     const images = document.querySelectorAll('.gallery img');
     const phraseEl = document.getElementById('lovePhrase');
+    const playBtn = document.getElementById('play-audio-btn');
+    const audio = document.getElementById('bg-audio');
     let current = 0;
-    let galleryInterval = null;
 
-    function startGallery() {
-      galleryInterval = setInterval(() => {
-        if (images.length === 0) return;
-        images[current].classList.remove('active');
-        current = (current + 1) % images.length;
-        images[current].classList.add('active');
+    // Galeria de fotos e frases
+    setInterval(() => {
+      if (images.length === 0) return;
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+      phraseEl.style.opacity = 0;
+      setTimeout(() => {
+        phraseEl.textContent = phrases[current % phrases.length];
+        phraseEl.style.opacity = 1;
+      }, 300);
+    }, 2000);
 
-        phraseEl.style.opacity = 0;
-        setTimeout(() => {
-          phraseEl.textContent = phrases[current % phrases.length];
-          phraseEl.style.opacity = 1;
-        }, 300);
-      }, 2000);
-    }
-
-    playButton.addEventListener('click', () => {
-      playButton.style.display = 'none';
-
-      // Força o carregamento antes do play
-      audio.load();
-      audio.play().then(() => {
-        startGallery();
-      }).catch(err => {
-        alert("O navegador bloqueou o áudio. Ative o som ou tente novamente.");
-        console.error("Erro ao iniciar áudio:", err);
-      });
-    });
-
+    // Contador de tempo desde 21/11/2023 23:00
     function updateTimer() {
       const start = new Date('2023-11-21T23:00:00');
       const now = new Date();
       let diff = Math.floor((now - start) / 1000);
 
-      const years = Math.floor(diff / (365.25 * 24 * 3600)); diff -= years * 365.25 * 24 * 3600;
-      const months = Math.floor(diff / (30.44 * 24 * 3600)); diff -= months * 30.44 * 24 * 3600;
-      const days = Math.floor(diff / (24 * 3600)); diff -= days * 24 * 3600;
-      const hours = Math.floor(diff / 3600); diff -= hours * 3600;
-      const minutes = Math.floor(diff / 60); diff -= minutes * 60;
+      const years = Math.floor(diff / (365.25 * 24 * 3600));
+      diff -= years * 365.25 * 24 * 3600;
+
+      const months = Math.floor(diff / (30.44 * 24 * 3600));
+      diff -= months * 30.44 * 24 * 3600;
+
+      const days = Math.floor(diff / (24 * 3600));
+      diff -= days * 24 * 3600;
+
+      const hours = Math.floor(diff / 3600);
+      diff -= hours * 3600;
+
+      const minutes = Math.floor(diff / 60);
+      diff -= minutes * 60;
+
       const seconds = diff;
 
-      document.getElementById("years").textContent = years;
-      document.getElementById("months").textContent = months;
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
     }
 
     setInterval(updateTimer, 1000);
     updateTimer();
+
+    // Ativar áudio via interação do botão
+    playBtn.addEventListener('click', () => {
+      audio.play().then(() => {
+        playBtn.style.display = 'none';
+      }).catch((err) => {
+        console.error('Erro ao tentar tocar o áudio:', err);
+      });
+    });
   </script>
 </body>
 </html>
