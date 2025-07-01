@@ -86,6 +86,22 @@
       color: #ccc;
     }
 
+    #play-audio-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #play-audio-btn:hover {
+      background-color: #e03575;
+    }
+
     @media (max-width: 600px) {
       .timer-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -97,7 +113,7 @@
 <body>
   <header>Calculadora do Amor</header>
 
-  <audio id="bg-audio" autoplay loop>
+  <audio id="bg-audio" loop>
     <source src="audio/musica.mp3" type="audio/mpeg">
     Seu navegador não suporta o elemento de áudio.
   </audio>
@@ -121,6 +137,8 @@
     <img src="img/Formatura.jpeg" alt="foto 15">
     <img src="img/Garopaba.jpeg" alt="foto 16">
   </div>
+
+  <button id="play-audio-btn">▶ Tocar Música</button>
 
   <div class="love-phrase" id="lovePhrase">Vivemos dias inesquecíveis.</div>
 
@@ -175,6 +193,8 @@
 
     const images = document.querySelectorAll('.gallery img');
     const phraseEl = document.getElementById('lovePhrase');
+    const playBtn = document.getElementById('play-audio-btn');
+    const audio = document.getElementById('bg-audio');
     let current = 0;
 
     // Galeria de fotos e frases
@@ -223,6 +243,15 @@
 
     setInterval(updateTimer, 1000);
     updateTimer();
+
+    // Ativar áudio via interação do botão
+    playBtn.addEventListener('click', () => {
+      audio.play().then(() => {
+        playBtn.style.display = 'none';
+      }).catch((err) => {
+        console.error('Erro ao tentar tocar o áudio:', err);
+      });
+    });
   </script>
 </body>
 </html>
