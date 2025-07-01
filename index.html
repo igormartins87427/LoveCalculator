@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora do Amor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #ff4081;
+    }
+
+    .gallery {
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .gallery img.active {
+      display: block;
+    }
+
+    .love-phrase {
+      font-size: 18px;
+      color: #ff80ab;
+      margin: 20px auto;
+      max-width: 90%;
+      transition: opacity 0.5s ease;
+    }
+
+    .timer-section {
+      margin-top: 40px;
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    .timer-block {
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff4081;
+    }
+
+    .timer-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff4081;
+    }
+
+    .timer-label {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    @media (max-width: 600px) {
+      .timer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Calculadora do Amor</header>
+
+  <audio id="bg-audio" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+   <div class="gallery">
+    <!-- As imagens reais serão inseridas nesta pasta e nomeadas como img1.jpg, img2.jpg... -->
+    <img src="img/São João.jpeg" class="active" alt="foto 1">
+    <img src="img/Nova Santa Rita.jpeg" alt="foto 2">
+    <img src="img/Picada Café.jpeg" alt="foto 3">
+    <img src="img/Capão.jpeg" alt="foto 4">
+    <img src="img/Comidinhas.jpeg" alt="foto 5">
+    <img src="img/Banheira.jpeg" alt="foto 6">
+    <img src="img/Bebidinhas 2.jpeg" alt="foto 7">
+    <img src="img/Bebidinhas.jpeg" alt="foto 8">
+    <img src="img/Reveion.jpeg" alt="foto 9">
+    <img src="img/Thiago Ventura.jpeg" alt="foto 10">
+    <img src="img/Boqueirao.jpeg" alt="foto 11">
+    <img src="img/Dia dos Namorados.jpeg" alt="foto 12">
+    <img src="img/Nova Petrópolis.jpeg" alt="foto 13">
+    <img src="img/Porto Alegre.jpeg" alt="foto 14">
+    <img src="img/Formatura.jpeg" alt="foto 15">
+    <img src="img/Garopaba.jpeg" alt="foto 16">
+  </div>
+
+  <div class="love-phrase" id="lovePhrase">Vivemos dias inesquecíveis.</div>
+
+  <div class="timer-section">
+    <div class="timer-grid">
+      <div class="timer-block">
+        <div class="timer-number" id="years">0</div>
+        <div class="timer-label">Anos</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="months">0</div>
+        <div class="timer-label">Meses</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="days">0</div>
+        <div class="timer-label">Dias</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="hours">0</div>
+        <div class="timer-label">Horas</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="minutes">0</div>
+        <div class="timer-label">Minutos</div>
+      </div>
+      <div class="timer-block">
+        <div class="timer-number" id="seconds">0</div>
+        <div class="timer-label">Segundos</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const phrases = [
+      "Vivemos dias inesquecíveis.",
+      "Cada instante foi mágico.",
+      "Sorrisos marcaram nossa história.",
+      "Corações sempre em sintonia.",
+      "Criamos memórias eternas juntos.",
+      "Teus abraços me completam.",
+      "Somos feitos um pro outro.",
+      "Compartilhamos sonhos e risos.",
+      "Amor que só cresce.",
+      "Nosso tempo é precioso.",
+      "Vencemos juntos cada fase.",
+      "Te amo mais sempre.",
+      "Momentos simples, muito amor.",
+      "Minha felicidade é você.",
+      "Tudo valeu a pena.",
+      "Que venham muitos mais."
+    ];
+
+    const images = document.querySelectorAll('.gallery img');
+    const phraseEl = document.getElementById('lovePhrase');
+    let current = 0;
+
+    setInterval(() => {
+      if (images.length === 0) return;
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+      phraseEl.style.opacity = 0;
+      setTimeout(() => {
+        phraseEl.textContent = phrases[current % phrases.length];
+        phraseEl.style.opacity = 1;
+      }, 300);
+    }, 2000);
+
+    function updateTimer() {
+      const start = new Date('2023-11-21T23:00:00');
+      const now = new Date();
+      let diff = Math.floor((now - start) / 1000);
+
+      const years = Math.floor(diff / (365.25 * 24 * 3600));
+      diff -= years * 365.25 * 24 * 3600;
+
+      const months = Math.floor(diff / (30.44 * 24 * 3600));
+      diff -= months * 30.44 * 24 * 3600;
+
+      const days = Math.floor(diff / (24 * 3600));
+      diff -= days * 24 * 3600;
+
+      const hours = Math.floor(diff / 3600);
+      diff -= hours * 3600;
+
+      const minutes = Math.floor(diff / 60);
+      diff -= minutes * 60;
+
+      const seconds = diff;
+
+      document.getElementById('years').textContent = years;
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Tentativa de reprodução automática do áudio via script (pode falhar dependendo do navegador)
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('bg-audio');
+      if (audio) {
+        audio.play().catch((err) => {
+          console.log('Reprodução automática bloqueada pelo navegador:', err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
