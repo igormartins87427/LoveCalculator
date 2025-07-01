@@ -101,7 +101,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      max-width: 600px;
+      max-width: 400px;
       margin: 0 auto;
       margin-top: 20px;
     }
@@ -266,10 +266,16 @@
       document.getElementById('seconds').textContent = seconds;
     }
 
-    startBtn.addEventListener("click", () => {
+    startBtn.addEventListener("click", async () => {
       initialScreen.classList.add("hidden");
       mainScreen.classList.remove("hidden");
-      audio.play().catch(() => {});
+
+      try {
+        await audio.play();
+      } catch (err) {
+        console.log("Erro ao reproduzir o áudio:", err);
+      }
+
       setInterval(updateTimer, 1000);
       setInterval(updateGallery, 2000);
       updateTimer();
